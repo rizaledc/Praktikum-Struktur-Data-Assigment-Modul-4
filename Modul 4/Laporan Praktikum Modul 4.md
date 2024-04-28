@@ -4,13 +4,13 @@
 
 ## Dasar Teori
 
-Searching yang dalam bahasa Indonesia artinya mencari, dengan algoritma searching seseorang dapat membuat program untuk mencari serta menemukan suatu nilai pada kumpulan data. Terdapat tiga kondisi sebagai hasil dari algoritma searching ini diantaranya: data ditemukan, data tidak ditemukan, dan data ditemukan lebih dari satu. Algoritma pencarian secara linear adalah algoritma untuk mencari sebuah nilai pada tabel sembarang dengan cara melakukan pass atau traversal dari awal sampa akhir tabel. Ada dua macam cara pencarian pada tabel. Algoritma ini mempunyai dua jenis metode yaitu dengan boolean dan tanpa boolean (Lovinta Happy Atrinawati). 
+Searching yang dalam bahasa Indonesia artinya mencari, dengan algoritma searching seseorang dapat membuat program untuk mencari serta menemukan suatu nilai pada kumpulan data. Terdapat tiga kondisi sebagai hasil dari algoritma searching ini diantaranya: data ditemukan, data tidak ditemukan, dan data ditemukan lebih dari satu. Algoritma pencarian secara linear adalah algoritma untuk mencari sebuah nilai pada tabel sembarang dengan cara melakukan pass atau traversal dari awal sampa akhir tabel. Ada dua macam cara pencarian pada tabel. Algoritma ini mempunyai dua jenis metode yaitu dengan boolean dan tanpa boolean [1]. 
 
-Algoritma searching dapat mempermudah metode pencarian data dengan terurut mulai dari awal hingga akhir berdasarkan kunci yang dicari (M. Utami, 2019). Proses pencarian dari algoritma searching ini akan berhenti ketika elemen kunci yang dicari telah ditemukan dalam baris maupun tidak ditemukan dalam baris ketika udah semua baris diperiksa (Iyan Hadi Mulyana). Terdapat 2 metode pada algoritma searching diantaranya:
+Algoritma searching dapat mempermudah metode pencarian data dengan terurut mulai dari awal hingga akhir berdasarkan kunci yang dicari [2]. Proses pencarian dari algoritma searching ini akan berhenti ketika elemen kunci yang dicari telah ditemukan dalam baris maupun tidak ditemukan dalam baris ketika udah semua baris diperiksa [3]. Terdapat 2 metode pada algoritma searching diantaranya:
 
 a. Sequential Search
 
-Algortima sequential searching adalah pencarian data semantik menggunakan teknologi array satu dimensi untuk melakukan proses pencarian tanpa  melalui semua elemen array secara berurutan, sehingga tidak perlu dilakukan pengurutan data terlebih dahulu (Wafiqah Setyawati Wahyuni). Searching ini juga dapat diartikan dengan proses pencarian suatu data dalam sebuah array tanpa mengecek satu persatu pada setiap index baris. 
+Algortima sequential searching adalah pencarian data semantik menggunakan teknologi array satu dimensi untuk melakukan proses pencarian tanpa  melalui semua elemen array secara berurutan, sehingga tidak perlu dilakukan pengurutan data terlebih dahulu [4]. Searching ini juga dapat diartikan dengan proses pencarian suatu data dalam sebuah array tanpa mengecek satu persatu pada setiap index baris. 
 
 Contoh Sequential Search:
 
@@ -19,7 +19,7 @@ Contoh Sequential Search:
 </p>
 
 b. Binary Search
-Algoritma binary search adalah algoritma untuk mencari sebuah nilai pada tabel teurut dengan cara menghilangkan setengah data pada setiap langkah (Lovinta Happy Atrinawati). Dalam penerapan algoritma ini sering digabungkan dengan algoritma sorting agar data dapat diurutkan terlebih dahulu. Binary search merupakan algoritma yang bekerja dengan cara membagi array menjadi dua bagian dengan mencari nilai tengahnya, lalu membandingkan nilai tengah tersebut dengan nilai yang sedang dicari. Jika nilai yang dicari sama dengan nilai tengah, maka program akan berhenti. Namun, jika nilai yang dicari tidak sama dengan nilai tengah, algoritma akan menentukan apakah nilai yang dicari lebih kecil atau lebih besar dari nilai tengah. Jika lebih kecil dari nilai tengah, maka bagian kanan dari data akan diabaikan, dan hanya bagian kiri yang akan diperiksa, begitu pula sebaliknya. Proses ini akan terus dilakukan hingga nilai yang dicari ditemukan atau seluruh array telah diperiksa.
+Algoritma binary search adalah algoritma untuk mencari sebuah nilai pada tabel teurut dengan cara menghilangkan setengah data pada setiap langkah [1]. Dalam penerapan algoritma ini sering digabungkan dengan algoritma sorting agar data dapat diurutkan terlebih dahulu. Binary search merupakan algoritma yang bekerja dengan cara membagi array menjadi dua bagian dengan mencari nilai tengahnya, lalu membandingkan nilai tengah tersebut dengan nilai yang sedang dicari. Jika nilai yang dicari sama dengan nilai tengah, maka program akan berhenti. Namun, jika nilai yang dicari tidak sama dengan nilai tengah, algoritma akan menentukan apakah nilai yang dicari lebih kecil atau lebih besar dari nilai tengah. Jika lebih kecil dari nilai tengah, maka bagian kanan dari data akan diabaikan, dan hanya bagian kiri yang akan diperiksa, begitu pula sebaliknya. Proses ini akan terus dilakukan hingga nilai yang dicari ditemukan atau seluruh array telah diperiksa.
 
 Contoh Binary Search:
 
@@ -741,5 +741,11 @@ Berikutnya, binary search yang merupakan algoritma yang cara kerjanya adalah mem
 
 ## Referensi
 
-M. Utami and Y. Apridiansyah, "Implementasi Algoritma Sequential Searching Pada Sistem Pelayanan Puskesmas Menggunakan Bootstrap (Studi Kasus Puskesmas Kampung Bali Bengkulu)," Journal Scientific and Applied Informatics (JSAI), vol. 2, no. 
-2614-3062, 2019.
+[1]	L. H. Atrinawati, “Analisis Kompleksitas Algoritma untuk Berbagai Macam Metode Pencarian Nilai (Searching) dan Pengurutan Nilai (Sorting) pada Tabel,” Progr. Stud. Tek. Inform., pp. 1–13.
+
+[2] M. Utami and Y. Apridiansyah, "Implementasi Algoritma Sequential Searching Pada Sistem Pelayanan Puskesmas Menggunakan Bootstrap (Studi Kasus Puskesmas Kampung Bali Bengkulu)," Journal Scientific and Applied Informatics (JSAI), vol. 2, no. 2614-3062, 2019.
+
+[3]	I. H. Mulyana and M. Rifqi, “Implementasi Algoritma Binary Tree dan Sequential Searching pada Aplikasi Web Multilevel Marketing,” J. Inform. J. Pengemb. IT, vol. 5, no. 3, pp. 83–87, 2020, doi:10.30591/jpit.v5i3.2087.
+
+[4]	W. S. Wahyuni, S. Andryana, and B. Rahman, “Penggunaan Algoritma Sequential Searching Pada Aplikasi Perpustakaan Berbasis Web,” JIPI (Jurnal Ilm. Penelit. dan Pembelajaran Inform., vol. 7, no. 2, pp.294–302, 2022, doi: 10.29100/jipi.v7i2.2646.
+
