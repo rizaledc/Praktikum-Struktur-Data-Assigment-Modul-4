@@ -19,7 +19,7 @@ Contoh Sequential Search:
 </p>
 
 b. Binary Search
-Algoritma pencarian biner adalah algoritma untuk mencari sebuah nilai pada tabel teurut dengan cara menghilangkan setengah data pada setiap langkah (Lovinta Happy Atrinawati). Dalam penerapan algoritma ini sering digabungkan dengan algoritma sorting agar data dapat diurutkan terlebih dahulu. 
+Algoritma binary search adalah algoritma untuk mencari sebuah nilai pada tabel teurut dengan cara menghilangkan setengah data pada setiap langkah (Lovinta Happy Atrinawati). Dalam penerapan algoritma ini sering digabungkan dengan algoritma sorting agar data dapat diurutkan terlebih dahulu. Binary search merupakan algoritma yang bekerja dengan cara membagi array menjadi dua bagian dengan mencari nilai tengahnya, lalu membandingkan nilai tengah tersebut dengan nilai yang sedang dicari. Jika nilai yang dicari sama dengan nilai tengah, maka program akan berhenti. Namun, jika nilai yang dicari tidak sama dengan nilai tengah, algoritma akan menentukan apakah nilai yang dicari lebih kecil atau lebih besar dari nilai tengah. Jika lebih kecil dari nilai tengah, maka bagian kanan dari data akan diabaikan, dan hanya bagian kiri yang akan diperiksa, begitu pula sebaliknya. Proses ini akan terus dilakukan hingga nilai yang dicari ditemukan atau seluruh array telah diperiksa.
 
 Contoh Binary Search:
 
@@ -138,66 +138,85 @@ Program di atas akan mengeluarkan output pesan singkat di awal program, lalu aka
 #### Full Code Screenshot
 
 <p align="center">
-  <img src="https://github.com/rizaledc/Praktikum-Struktur-Data-Assigment-Modul-3/blob/main/Modul%203/Screenshot%20Kode%20dan%20Output/Guided1.png" alt="Alt Text">
+  <img src="https://github.com/rizaledc/Praktikum-Struktur-Data-Assigment-Modul-4/blob/main/Modul%204/Screenshot/Guided1.png" alt="Alt Text">
 </p>
 
 #### Screenshot Output
 
 <p align="center">
-  <img src="https://github.com/rizaledc/Praktikum-Struktur-Data-Assigment-Modul-3/blob/main/Modul%203/Screenshot%20Kode%20dan%20Output/OutGuid1.png" alt="Alt Text">
+  <img src="https://github.com/rizaledc/Praktikum-Struktur-Data-Assigment-Modul-4/blob/main/Modul%204/Screenshot/OutGuided1.png" alt="Alt Text">
 </p>
 
 ### 2. Guided 2
-#### Mengurutkan karakter secara descending menggunakan algoritma insertion sort.
+#### Buatlah sebuah project untuk melakukan pencarian data dengan menggunakan Binary Search
 
 ```C++
-#include <iostream> 
-// MEMBUAT PENGURUTAN DESCENDING
-using namespace std; 
+#include <iostream>
+#include <iomanip>
 
-// Fungsi untuk mengurutkan baris karakter menggunakan algoritma insertion sort
-void insertion_sort(char arr[], int length) { 
-    int i, j; 
-    char tmp; 
+using namespace std;
 
-    // Melakukan pengulangan untuk setiap elemen dalam baris
-    for (i = 1; i < length; i++) { 
-        j = i; 
+int bil_data[7] = {1, 8, 2, 5, 4, 9, 7};
+int cari;
 
-        // Membandingkan elemen saat ini dengan elemen sebelumnya dan menukar jika diperlukan
-        while (j > 0 && arr[j - 1] < arr[j]) { 
-            tmp = arr[j]; 
-            arr[j] = arr[j - 1]; 
-            arr[j - 1] = tmp; 
-            j--; 
-        }//end while loop 
-    }//end for loop 
-}//end insertion_sort 
+void selection_sort() {
+    int temp, min, i, j;
+    for(i = 0; i < 7; i++) {
+        min = i;
+        for(j = i + 1; j < 7; j++) {
+            if(bil_data[j] < bil_data[min]) {
+                min = j;
+            }
+        }
+        temp = bil_data[i];
+        bil_data[i] = bil_data[min];
+        bil_data[min] = temp;
+    }
+}
 
-// Fungsi untuk mencetak isi baris
-void print_array(char a[], int length) { 
-    for(int i=0; i<length; i++) { 
-        cout << a[i] << "\t"; 
-    } 
-    cout << endl; 
-} 
+void binary_search() {
+    int awal, akhir, tengah, b_flag = 0;
+    awal = 0;
+    akhir = 6;
+    while (b_flag == 0 && awal <= akhir) {
+        tengah = (awal + akhir) / 2;
+        if(bil_data[tengah] == cari) {
+            b_flag = 1;
+            break;
+        } else if(bil_data[tengah] < cari) {
+            awal = tengah + 1;
+        } else {
+            akhir = tengah - 1;
+        }
+    }
+    if(b_flag == 1) {
+        cout << "\n Data ditemukan pada index ke-" << tengah << endl;
+    } else {
+        cout << "\n Data tidak ditemukan\n";
+    }
+}
 
-// Fungsi utama program
-int main() { 
-    int length = 6;  // Panjang baris yang ditentukan
-    char a[length] = {'s', 'a', 'y', 'a', 'n', 'g'};  // Inisialisasi baris karakter
-
-    // Mencetak isi baris sebelum pengurutan
-    cout << "Urutan karakter sebelum sorting: " << endl; 
-    print_array(a, length); 
-
-    // Memanggil fungsi insertion_sort untuk mengurutkan baris
-    insertion_sort(a, length); 
-
-    // Mencetak isi baris setelah pengurutan
-    cout << "\nUrutan karakter setelah sorting: " << endl; 
-    print_array(a, length); 
-} 
+int main() {
+    cout << "\t BINARY SEARCH\n";
+    cout << "\n Data : ";
+    // tampilkan data awal
+    for(int x = 0; x < 7; x++) {
+        cout << setw(3) << bil_data[x];
+    }
+    cout << endl;
+    cout << "\n Masukkan data yang ingin Anda cari : ";
+    cin >> cari;
+    cout << "\n Data diurutkan : ";
+    // urutkan data dengan selection sort
+    selection_sort();
+    // tampilkan data setelah diurutkan
+    for(int x = 0; x < 7; x++) {
+        cout << setw(3) << bil_data[x];
+    }
+    cout << endl;
+    binary_search();
+    return 0;
+}
 ```
 
 **Penjelasan:**
@@ -206,63 +225,104 @@ int main() {
 
 ```C++
 #include <iostream>
+#include <iomanip>
+
 using namespace std;
 ```
 
-Library iostream digunakan untuk menjalankan operasi input dan output pada program. Lalu namespace std dipanggil agar saat penulisan fungsi tidak perlu ditambahkan std lagi.
+Library iostream digunakan untuk menjalankan operasi input dan output pada program. iomanip digunakan untuk mengatur tampilan dari output dalam C++. Lalu namespace std dipanggil agar saat penulisan fungsi tidak perlu ditambahkan std lagi.
 
 #### Bagian 2
 
 ```C++
-void insertion_sort(char arr[], int length) { 
-    int i, j; 
-    char tmp; 
-
-    for (i = 1; i < length; i++) { 
-        j = i; 
-        while (j > 0 && arr[j - 1] < arr[j]) { 
-            tmp = arr[j]; 
-            arr[j] = arr[j - 1]; 
-            arr[j - 1] = tmp; 
-            j--; 
-        }
-    }
-}
+int bil_data[7] = {1, 8, 2, 5, 4, 9, 7};
+int cari;
 ```
 
-Kode di atas akan menjelakankan operasi algoritma insertion sort untuk mengurutkan seluruh elemen dari array yang berisi karakter secara descending (besar ke kecil). Dimana terdapat dua jenis variabel yaitu **i** dan **j** yang dapat digunakan untuk indeks dalam setiap iterasi atau perulangan. Ketika nilai **i = 1** lebih kecil dari panjang array maka i akan terus bertambah sehingga mencapai panjang array yang ditentukan. Ketika **i** = **j** maka perulangan while akan dijalankan untuk membandingkan elemen yang saat itu dengan elemen sebelumnya.
+Menginisiasi array 'bil_data' yang berisi data angka. Lalu 'cari' untuk menyimpan data yang akan di cari.
 
 #### Bagian 3
 
 ```C++
- void print_array(char a[], int length) { 
-    for(int i=0; i<length; i++) { 
-        cout << a[i] << "\t"; 
-    } 
-    cout << endl; 
-}   
+void selection_sort() {
+    int temp, min, i, j;
+    for(i = 0; i < 7; i++) {
+        min = i;
+        for(j = i + 1; j < 7; j++) {
+            if(bil_data[j] < bil_data[min]) {
+                min = j;
+            }
+        }
+        temp = bil_data[i];
+        bil_data[i] = bil_data[min];
+        bil_data[min] = temp;
+    }
+}
 ```
 
-Kode di atas digunakan untuk mencetak isi dari array ke terminal dengan menggunakan loop for. Operasinya masih sama menggunakan variabel **i**.
+Kode di atas merupakan fungsi selection sort yang digunakan untuk mengurutkan data di dalam array 'bil_data' secara ascending atau dari kecil ke terbesar.
 
 #### Bagian 4
 
 ```C++
-int main() { 
-    int length = 6; 
-    char a[length] = {'s', 'a', 'y', 'a', 'n', 'g'}; 
-
-    cout << "Urutan karakter sebelum sorting: " << endl; 
-    print_array(a, length); 
-
-    insertion_sort(a, length); 
-
-    cout << "\nUrutan karakter setelah sorting: " << endl; 
-    print_array(a, length); 
+void binary_search() {
+    int awal, akhir, tengah, b_flag = 0;
+    awal = 0;
+    akhir = 6;
+    while (b_flag == 0 && awal <= akhir) {
+        tengah = (awal + akhir) / 2;
+        if(bil_data[tengah] == cari) {
+            b_flag = 1;
+            break;
+        } else if(bil_data[tengah] < cari) {
+            awal = tengah + 1;
+        } else {
+            akhir = tengah - 1;
+        }
+    }
+    if(b_flag == 1) {
+        cout << "\n Data ditemukan pada index ke-" << tengah << endl;
+    } else {
+        cout << "\n Data tidak ditemukan\n";
+    }
 }
 ```
 
-Pada kode ini kita mengetahui bahwa ini merupakan fungsi inti atau fungsi main yang merupakan fungsi pertama kali yang akan dieksekusi. Pada cout pertama akan mencetak array yang belum di sorting, lalu pada cout berikutnya akan mencetak array yang telah disorting karena sebelumnya telah memanggil **insertion_sort(a, length)**.
+Pada kode di atas, merupakan fungsi binary search yang digunakan untuk mencari data dalam array yang sudah ada. Cara kerjanya sama yaitu dengan membagi dua nilai array lalu melakukan kerja seperti halnya binary search.
+
+#### Bagian 5
+
+```C++
+int main() {
+    // Output judul program
+    cout << "\t BINARY SEARCH\n";
+    
+    // Output data awal
+    cout << "\n Data : ";
+    for(int x = 0; x < 7; x++) {
+        cout << setw(3) << bil_data[x];
+    }
+    cout << endl;
+    
+    // Input data yang akan dicari
+    cout << "\n Masukkan data yang ingin Anda cari : ";
+    cin >> cari;
+    
+    // Output data setelah diurutkan
+    cout << "\n Data diurutkan : ";
+    selection_sort();
+    for(int x = 0; x < 7; x++) {
+        cout << setw(3) << bil_data[x];
+    }
+    cout << endl;
+    
+    // Pencarian menggunakan Binary Search
+    binary_search();
+    return 0;
+}
+```
+
+Fungsi di atas merupakan fungsi main atau fungsi utama dalam pemrograman, fungsi ini akan dieksekusi pertama kali dalam program mulai dari pesan "BINARY SEARCH" yang berada di tengah, lalu ada output data awal, lalu pengguna akan menginputkan data yang akan dicari, berikutnya ada output data setelah di urutkan, dan yang terakhir ada output pencarian menggunakan binary search. Data yang dicar8i akan diberikan pesan data ditemukan pada indeks ke berapa.
 
 #### Output:
 
@@ -274,76 +334,80 @@ BINARY SEARCH
  Masukkan data yang ingin Anda cari : 8
 
  Data diurutkan :   1  2  4  5  7  8  9
+
+ Data ditemukan pada index ke-5
 ```
 
 **Penjelasan:**
 
-Dengan hasil output kodingan di atas, kita mengetahui bahwa hasil dari cout pertama merupakan urutan bilangan sebelum di sorting lalu pada cout kedua merupakan urutan bilangan setelah disorting. Pada output kodingan ini bernilai benar karena urutan sudah secara descending.
+Sesuai dengan fungsi main, output di atas urutannya telah di atur dalam fungsi main mulai dari output string BINARY SEARCH, data, lalu inputan data yang ingin dicari, berikutnya data yang diurutkan dan data ditemukan pada indeks ke-5, karena pengguna ingin mencari angka 8 yang setelah di urutkan berada pada indeks ke-5.
 
 #### Full Code Screenshot
 
 <p align="center">
-  <img src="https://github.com/rizaledc/Praktikum-Struktur-Data-Assigment-Modul-3/blob/main/Modul%203/Screenshot%20Kode%20dan%20Output/Guided2.png" alt="Alt Text">
+  <img src="https://github.com/rizaledc/Praktikum-Struktur-Data-Assigment-Modul-4/blob/main/Modul%204/Screenshot/Guided2.png" alt="Alt Text">
 </p>
 
 #### Screenshot Output
 
 <p align="center">
-  <img src="https://github.com/rizaledc/Praktikum-Struktur-Data-Assigment-Modul-3/blob/main/Modul%203/Screenshot%20Kode%20dan%20Output/OutGuid2.png" alt="Alt Text">
+  <img src="https://github.com/rizaledc/Praktikum-Struktur-Data-Assigment-Modul-4/blob/main/Modul%204/Screenshot/OutGuided2.png" alt="Alt Text">
 </p>
 
 ## Unguided 
 
 ### 1. Unguided 1
 
-#### Kelas S1 IF 2016 G memiliki 5 mahasiswa. Pada akhir semester mereka menerima lembar Indeks Prestasi Semester (IPS), masing-masing mahasiswa tersebut memiliki IPS sebagai berikut: {3.8, 2.9, 3.3, 4.0, 2.4}. Buatlah program untuk mengurutkan IPS mahasiswa tersebut dari yang terbesar hingga terkecil dengan menggunakan algoritma Selection Sort! 
+#### Buatlah sebuah program untuk mencari sebuah huruf pada sebuah kalimat yang sudah di input dengan menggunakan Binary Search! 
 
 **Kode Program:**
 
 ```C++
 #include <iostream>
+#include <algorithm>
+#include <string>
 
 using namespace std;
 
-// Fungsi untuk melakukan pengurutan menggunakan algoritma Selection Sort
-void selection_sort(double arr[], int length) {
-    for (int i = 0; i < length - 1; i++) {
-        int max_index = i; // Indeks maksimum diinisialisasi dengan indeks saat ini
+// Fungsi untuk mencari sebuah huruf pada sebuah kalimat menggunakan Binary Search
+bool binarySearch(const string& sentence, char target) {
+    int left = 0;
+    int right = sentence.length() - 1;
+    
+    while (left <= right) {
+        int mid = left + (right - left) / 2;
 
-        // Mencari indeks nilai maksimum dari sisa larik yang belum diurutkan
-        for (int j = i + 1; j < length; j++) {
-            if (arr[j] > arr[max_index]) {
-                max_index = j;
-            }
+        if (sentence[mid] == target) {
+            return true; // Huruf ditemukan
+        } else if (sentence[mid] < target) {
+            left = mid + 1; // Cari di sebelah kanan
+        } else {
+            right = mid - 1; // Cari di sebelah kiri
         }
-
-        // Menukar elemen pada indeks maksimum dengan elemen pada indeks saat ini
-        double temp = arr[i];
-        arr[i] = arr[max_index];
-        arr[max_index] = temp;
     }
-}
 
-// Fungsi untuk mencetak IPS mahasiswa
-void print_ips(double ips[], int length) {
-    for (int i = 0; i < length; i++) {
-        cout << ips[i] << "\t";
-    }
-    cout << endl;
+    return false; // Huruf tidak ditemukan
 }
 
 int main() {
-    int length = 5; // Jumlah mahasiswa
-    double ips[] = {3.8, 2.9, 3.3, 4.0, 2.4}; // IPS mahasiswa
+    string sentence;
+    char target;
 
-    cout << "IPS mahasiswa sebelum pengurutan: " << endl;
-    print_ips(ips, length);
+    cout << "Masukkan kalimat: ";
+    getline(cin, sentence);
 
-    // Memanggil fungsi selection_sort untuk mengurutkan IPS mahasiswa
-    selection_sort(ips, length);
+    // Melakukan sorting pada kalimat untuk memastikan binary search dapat berfungsi
+    sort(sentence.begin(), sentence.end());
 
-    cout << "\nIPS mahasiswa setelah pengurutan: " << endl;
-    print_ips(ips, length);
+    cout << "Masukkan huruf yang ingin dicari: ";
+    cin >> target;
+
+    // Menggunakan binary search untuk mencari huruf
+    if (binarySearch(sentence, target)) {
+        cout << "Huruf '" << target << "' ditemukan dalam kalimat." << endl;
+    } else {
+        cout << "Huruf '" << target << "' tidak ditemukan dalam kalimat." << endl;
+    }
 
     return 0;
 }
@@ -355,139 +419,130 @@ int main() {
 
 ```C++
 #include <iostream>
+#include <algorithm>
+#include <string>
+
 using namespace std;
 ```
 
-Library iostream digunakan untuk menjalankan operasi input dan output pada program. Lalu namespace std dipanggil agar saat penulisan fungsi tidak perlu ditambahkan std lagi.
+Library iostream digunakan untuk menjalankan operasi input dan output pada program. #include <algorithm> dan #include <string> digunakan untuk menyediakan fungsi algoritma dan mengatur string lebih luas dan lebih mudah. Lalu namespace std dipanggil agar saat penulisan fungsi tidak perlu ditambahkan std lagi.
 
 #### Bagian 2
 
 ```C++
-void selection_sort(double arr[], int length) {
-    for (int i = 0; i < length - 1; i++) {
-        int max_index = i; 
+bool binarySearch(const string& sentence, char target) {
+    int left = 0;
+    int right = sentence.length() - 1;
+    
+    while (left <= right) {
+        int mid = left + (right - left) / 2;
 
-        for (int j = i + 1; j < length; j++) {
-            if (arr[j] > arr[max_index]) {
-                max_index = j;
-            }
+        if (sentence[mid] == target) {
+            return true; // Huruf ditemukan
+        } else if (sentence[mid] < target) {
+            left = mid + 1; // Cari di sebelah kanan
+        } else {
+            right = mid - 1; // Cari di sebelah kiri
         }
-
-        double temp = arr[i];
-        arr[i] = arr[max_index];
-        arr[max_index] = temp;
     }
+
+    return false; // Huruf tidak ditemukan
 }
 ```
 
-Fungsi **selection_sort** digunakan untuk mengurutkan array dalam variabel **arr** yang merupakan tempat penyimpanan nilai IPS mahasiswa. Di setiap perulangan menggunakan for, **i** akan menggunakan algoritma untuk mencari nilai terbesar dari sisa array yang belum diurutkan. Jika nilai terbesar tersebut ditemukan, maka nilai pada indeks **ke-i** akan ditukar dengan nilai tersebut.
+Kode di atas merupakan fungsi binary search yang dapat menerima dua parameter yaitu sentence yang berupa kalimat dan target yang merupakan huruf yang akan dicari oleh pengguna. Pencarian dalam kode ini dengan cara mengurutkan huruf dalam sentence lalu mencari huruf dalam variabel target menggunakan binary search.
 
 #### Bagian 3
 
 ```C++
-void print_ips(double ips[], int length) { 
-    for (int i = 0; i < length; i++) {
-        cout << ips[i] << "\t"; 
-    } 
-    cout << endl; 
-}  
-```
+int main() {
+    string sentence;
+    char target;
 
-Fungsi di atas digunakan untuk memunculkan IPS ke terminal. Pada kode di atas juga menggunakan perulangan for sehingga nilai IPS akan di cetak satu persatu. 
+    cout << "Masukkan kalimat: ";
+    getline(cin, sentence);
 
-#### Bagian 4
+    // Melakukan sorting pada kalimat untuk memastikan binary search dapat berfungsi
+    sort(sentence.begin(), sentence.end());
 
-```C++
-int main() { 
-    int length = 5; 
-    double ips[] = {3.8, 2.9, 3.3, 4.0, 2.4}; 
+    cout << "Masukkan huruf yang ingin dicari: ";
+    cin >> target;
 
-    cout << "IPS mahasiswa sebelum pengurutan: " << endl; 
-    print_ips(ips, length); 
-
-    selection_sort(ips, length); 
-
-    cout << "\nIPS mahasiswa setelah pengurutan: " << endl; 
-    print_ips(ips, length); 
+    // Menggunakan binary search untuk mencari huruf
+    if (binarySearch(sentence, target)) {
+        cout << "Huruf '" << target << "' ditemukan dalam kalimat." << endl;
+    } else {
+        cout << "Huruf '" << target << "' tidak ditemukan dalam kalimat." << endl;
+    }
 
     return 0;
 }
 ```
 
-Kode di atas merupakan fungsi main atau fungsi inti yang akan dieksekusi pertama. Pada fungsi main ini terdapat array **ips** yang belum di urutkan sehingga terdapat fungsi **selection_sort** yang dipanggil untuk mengurutkan nilai IPS. Kode di atas akan mencetak nilai IPS setelah pengurutan diselesaikan.
+Fungsi di atas merupakan fungsi main yang berupa fungsi utama di dalam progran. Fungsi ini akan meminta pengguna untuk memasukkan kalimat dengan fungsi getline lalu memasukkan huruf yang ingin di cari menggunakan cin. Sebelum melakukan pencarian, kode akan menggunakan fungsi sorting untuk mengurutkan kalimat, lalu fungsi binary search akan berjalan. Jika huruf yang dicari ada pada kalimat maka outputnya akan masuk ke if, jika tidak ditemukan maka akan mengeksekusi pada bagian else.
 
 **Output:**
 
 ```C++
-IPS mahasiswa sebelum pengurutan: 
-3.8     2.9     3.3     4       2.4
-
-IPS mahasiswa setelah pengurutan: 
-4       3.8     3.3     2.9     2.4
+Masukkan kalimat: Rizal Wahyu Pratama
+Masukkan huruf yang ingin dicari: P
+Huruf 'P' ditemukan dalam kalimat.
 ```
 
 #### Penjelasan
 
-Pada output di terminal akan mengeluarkan nilai IPS mahasiswa yang belum di urutkan terlebih dahulu, berikutnya akan dicetak IPS mahasiswa setelah di urutkan. Output program ini sebelumnya sudah di atur pada fungsi main.
+Pada output di atas, pengguna memasukkan kalimat Rizal Wahyu Pratama dengan mencari huruf P. Karena huruf P ada di dalam kalimat maka outputnya adalah "Huruf 'P' ditemukan dalam kalimat".
 
 #### Full code Screenshot:
 
 <p align="center">
-  <img src="https://github.com/rizaledc/Praktikum-Struktur-Data-Assigment-Modul-3/blob/main/Modul%203/Screenshot%20Kode%20dan%20Output/Unguided1.png" alt="Alt Text">
+  <img src="https://github.com/rizaledc/Praktikum-Struktur-Data-Assigment-Modul-4/blob/main/Modul%204/Screenshot/Unguided1.png" alt="Alt Text">
 </p>
 
 #### Screenshot Output
 
 <p align="center">
-  <img src="https://github.com/rizaledc/Praktikum-Struktur-Data-Assigment-Modul-3/blob/main/Modul%203/Screenshot%20Kode%20dan%20Output/OutUn1.png" alt="Alt Text">
+  <img src="https://github.com/rizaledc/Praktikum-Struktur-Data-Assigment-Modul-4/blob/main/Modul%204/Screenshot/OutUnGuid1.png" alt="Alt Text">
 </p>
 
 ### 2. Unguided 2
 
-#### Pak RT memiliki 10 warga dengan nama: siti, situ, sana, ana, ani, caca, cici, dida, dodo, dan dadi. Supaya mudah dalam melakukan pencarian, Pak RT akan mengurutkan nama-nama tersebut sesuai dengan alfabet. Buatlah program untuk membantu Pak RT dengan menggunakan algoritma Bubble Sort!
+#### Buatlah sebuah program yang dapat menghitung banyaknya huruf vocal dalam sebuah kalimat! 
 
 **Kode Program:**
 
 ```C++
 #include <iostream>
 #include <string>
+#include <cctype>
 
 using namespace std;
 
-// Fungsi untuk mengurutkan nama-nama warga menggunakan algoritma Bubble Sort
-void bubble_sort(string arr[], int length) {
-    for (int i = 0; i < length - 1; i++) {
-        for (int j = 0; j < length - i - 1; j++) {
-            // Membandingkan dua nama berturut-turut dan menukar jika perlu
-            if (arr[j] > arr[j + 1]) {
-                string temp = arr[j];
-                arr[j] = arr[j + 1];
-                arr[j + 1] = temp;
-            }
+// Function to count the number of vowels in a sentence
+int countVowels(const string& sentence) {
+    int vowelCount = 0;
+
+    for (char c : sentence) {
+        // Convert character to lowercase
+        char lowercaseChar = tolower(c);
+
+        // Check if the character is a vowel
+        if (lowercaseChar == 'a' || lowercaseChar == 'i' || lowercaseChar == 'u' ||
+            lowercaseChar == 'e' || lowercaseChar == 'o') {
+            vowelCount++;
         }
     }
-}
 
-// Fungsi untuk mencetak nama-nama warga
-void print_names(string names[], int length) {
-    for (int i = 0; i < length; i++) {
-        cout << names[i] << "\t";
-    }
-    cout << endl;
+    return vowelCount;
 }
 
 int main() {
-    int length = 10; // Jumlah warga
-    string names[] = {"siti", "situ", "sana", "ana", "ani", "caca", "cici", "dida", "dodo", "dadi"}; // Nama-nama warga
+    string sentence;
+    cout << "Enter a sentence: ";
+    getline(cin, sentence);
+    int numVowels = countVowels(sentence);
 
-    cout << "Nama-nama warga sebelum pengurutan: " << endl;
-    print_names(names, length);
-
-    // Memanggil fungsi bubble_sort untuk mengurutkan nama-nama warga
-    bubble_sort(names, length);
-
-    cout << "\nNama-nama warga setelah pengurutan: " << endl;
-    print_names(names, length);
+    cout << "The number of vowels in the sentence is: " << numVowels << endl;
 
     return 0;
 }
@@ -500,156 +555,109 @@ int main() {
 ```C++
 #include <iostream>
 #include <string>
+#include <cctype>
 
 using namespace std;
 ```
 
-Dalam kode di atas kita akan menggunakan 2 library yaitu **<iostream>** untuk input dan output serta **<string>** untuk membebaskan dalam penggunaan tipe data string. Lalu namespace **std** dipanggil agar saat penulisan fungsi tidak perlu ditambahkan std lagi.
+Dalam kode di atas kita akan menggunakan 2 library yaitu **<iostream>** untuk input dan output, #include <cctype> digunakan untuk mengevaluasi dan memanipulasi karakter, serta **<string>** untuk membebaskan dalam penggunaan tipe data string. Lalu namespace **std** dipanggil agar saat penulisan fungsi tidak perlu ditambahkan std lagi.
 
 #### Bagian 2
 
 ```C++
-void bubble_sort(string arr[], int length) {
-    for (int i = 0; i < length - 1; i++) {
-        for (int j = 0; j < length - i - 1; j++) {
-            if (arr[j] > arr[j + 1]) {
-                string temp = arr[j];
-                arr[j] = arr[j + 1];
-                arr[j + 1] = temp;
-            }
+// Function to count the number of vowels in a sentence
+int countVowels(const string& sentence) {
+    int vowelCount = 0;
+
+    for (char c : sentence) {
+        // Convert character to lowercase
+        char lowercaseChar = tolower(c);
+
+        // Check if the character is a vowel
+        if (lowercaseChar == 'a' || lowercaseChar == 'i' || lowercaseChar == 'u' ||
+            lowercaseChar == 'e' || lowercaseChar == 'o') {
+            vowelCount++;
         }
     }
+
+    return vowelCount;
 }
 ```
 
-Kode di atas menggunakan fungsi bubble sort. Dimana **bubble_sort** akan berisikan array string **arr** serta **length** yang merupakan panjang dari array tersebut. Terdapat dua perulangan bertingkat dimana ada for di dalam for. For pertama akan digunakan untuk melakukan perbandingan dan pertukaran elemen. For kedua digunakan untuk memasangkan setiap pasangan elemen secara berturut-turut, dan akan disesuaikan urutannya.
+Kode di atas merupakan fungsi untuk menghitung jumlah huruf vokal yang ada pada kalimat yang diberikan. Menggunakan sentence yang merupakan kalimat yang akan dianalisis dan mengubahnya semua ke dalam huruf kecil menggunakan tolower(), jika ada huruf vokal dalam kalimat maka akan ditambahkan ke vowelcount.
 
 #### Bagian 3
 
 ```C++
-void print_names(string names[], int length) {
-    for (int i = 0; i < length; i++) {
-        cout << names[i] << "\t";
-    }
-    cout << endl;
-}
-```
-
-Pada kode di atas tedapat fungsi **print_names** yang akan digunakan untuk mencetak nama-nama ke terminal. Kita menggunakan perulangan for dalam memanggil nama-nama yang ada.
-
-#### Bagian 4
-
-```C++
 int main() {
-    int length = 10; 
-    string names[] = {"siti", "situ", "sana", "ana", "ani", "caca", "cici", "dida", "dodo", "dadi"}; 
+    string sentence;
+    cout << "Enter a sentence: ";
+    getline(cin, sentence);
+    int numVowels = countVowels(sentence);
 
-    cout << "Nama-nama warga sebelum pengurutan: " << endl;
-    print_names(names, length);
-
-    bubble_sort(names, length);
-
-    cout << "\nNama-nama warga setelah pengurutan: " << endl;
-    print_names(names, length);
+    cout << "The number of vowels in the sentence is: " << numVowels << endl;
 
     return 0;
 }
 ```
 
-Kode di atas merupakan kode yang digunakan untuk membuat fungsi main. Fungsi main ini merupakan kode yang pertama kali akan dieksekusi dalam menjalankan sebuah program. Di dalam kode dilakukan inisiasi array **names** yang diisi dengan nama-nama warga sebelum diurutkan, sehingga dipanggil fungsi **bubble_sort** untuk mengurutkan nama-nama warga untuk dicetak kembali setelah di urutkan.
+Kode di atas merupakan kode yang digunakan untuk membuat fungsi main. Fungsi main ini merupakan kode yang pertama kali akan dieksekusi dalam menjalankan sebuah program. Pertama-tama pengguna akan diminta untuk memasukkan kalimat dengan menggunakan getline(). Lalu memanggil fungsi countVowels untuk menghitung banyaknya huruf vokal dari kalimat yang dimasukkan pengguna. Lalu hasilnya akan muncul menggunakan cout.
 
 **Output:**
 
 ```C++
-Nama-nama warga sebelum pengurutan: 
-siti    situ    sana    ana     ani     caca    cici    dida    dodo    dadi
-
-Nama-nama warga setelah pengurutan: 
-ana     ani     caca    cici    dadi    dida    dodo    sana    siti    situ
+Enter a sentence: Rizal Wahyu Pratama
+The number of vowels in the sentence is: 7
 ```
 
 #### Penjelasan
 
-Pada output di terminal akan mengeluarkan nama-nama dari warga yang belum di urutkan terlebih dahulu, berikutnya akan dikeluarkan nama-nama warga setelah di urutkan. Output program ini sebelumnya sudah di atur pada fungsi main sehingga fungsi main akan sangat penting dalam pemrograman.
+Pada output di atas pengguna memasukkan kalimat Rizal Wahyu Pratama, karena dalam kalimat ini terdapat 7 huruf vokal maka program tadi memunculkan outputnya berupa "The number of vowels in the sentence is: 7"
 
 #### Full code Screenshot:
 
 <p align="center">
-  <img src="https://github.com/rizaledc/Praktikum-Struktur-Data-Assigment-Modul-3/blob/main/Modul%203/Screenshot%20Kode%20dan%20Output/Unguided2.png" alt="Alt Text">
+  <img src="https://github.com/rizaledc/Praktikum-Struktur-Data-Assigment-Modul-4/blob/main/Modul%204/Screenshot/Unguided2.png" alt="Alt Text">
 </p>
 
 #### Screenshot Output
 
 <p align="center">
-  <img src="https://github.com/rizaledc/Praktikum-Struktur-Data-Assigment-Modul-3/blob/main/Modul%203/Screenshot%20Kode%20dan%20Output/OutUn2.png" alt="Alt Text">
+  <img src="https://github.com/rizaledc/Praktikum-Struktur-Data-Assigment-Modul-4/blob/main/Modul%204/Screenshot/OutUnGuid2.png" alt="Alt Text">
 </p>
 
 ### 3. Unguided 3
 
-#### Buatlah program yang meminta user menginputkan suatu bilangan n dan meminta user untuk menginputkan sejumlah n karakter. Kemudian program akan melakukan sorting secara menaik (ascending) dan menurun (descending)!
+#### Diketahui data = 9, 4, 1, 4, 7, 10, 5, 4, 12, 4. Hitunglah berapa banyak angka 4 dengan menggunakan algoritma Sequential Search!
 
 **Kode Program:**
 
 ```C++
 #include <iostream>
 #include <vector>
-#include <algorithm>
 
 using namespace std;
 
-void insertionSort(vector<char> &arr) {
-    int n = arr.size();
-    for (int i = 1; i < n; ++i) {
-        char key = arr[i];
-        int j = i - 1;
-        while (j >= 0 && arr[j] > key) {
-            arr[j + 1] = arr[j];
-            j = j - 1;
+// Function to count the occurrences of a number in a vector using Sequential Search
+int countOccurrences(const vector<int>& data, int target) {
+    int count = 0;
+
+    for (int num : data) {
+        if (num == target) {
+            count++;
         }
-        arr[j + 1] = key;
     }
+
+    return count;
 }
 
 int main() {
-    int n;
-    cout << "Masukkan panjang baris: ";
-    cin >> n;
+    vector<int> data = {9, 4, 1, 4, 7, 10, 5, 4, 12, 4};
+    int target = 4;
 
-    vector<char> characters(n);
+    int numOccurrences = countOccurrences(data, target);
 
-    // Meminta pengguna untuk memasukkan n karakter
-    for (int i = 0; i < n; ++i) {
-        cout << "Masukkan karakter atau angka ke-" << i + 1 << ": ";
-        cin >> characters[i];
-    }
-
-    // Menampilkan isi baris sebelum pengurutan
-    cout << "\nIsi baris sebelum diurutkan: ";
-    for (char c : characters) {
-        cout << c << " ";
-    }
-    cout << endl;
-
-    // Mengurutkan karakter menggunakan Insertion Sort secara ascending (kecil ke besar)
-    insertionSort(characters);
-
-    // Menampilkan hasil pengurutan secara ascending (kecil ke besar)
-    cout << "\nHasil pengurutan secara ascending (kecil ke besar): ";
-    for (char c : characters) {
-        cout << c << " ";
-    }
-
-    // Mengurutkan karakter menggunakan Insertion Sort secara descending (besar ke kecil)
-    insertionSort(characters);
-    reverse(characters.begin(), characters.end());
-
-    // Menampilkan hasil pengurutan secara descending (besar ke kecil)
-    cout << "\nHasil pengurutan secara descending (besar ke kecil): ";
-    for (char c : characters) {
-        cout << c << " ";
-    }
-
-    cout << endl;
+    cout << "The number of occurrences of " << target << " in the data is: " << numOccurrences << endl;
 
     return 0;
 }
@@ -662,135 +670,74 @@ int main() {
 ```C++
 #include <iostream>
 #include <vector>
-#include <algorithm>
 
 using namespace std;
 ```
 
-Dalam kode di atas kita akan menggunakan 3 library yaitu **<iostream>** untuk input dan output, **<vector>** untuk membebaskan dalam penggunaan vector dalam pengurutan, dan **<algorithm>** yang akan digunakan pada fungsi **reverse()** dalam pengurutan vector secara descending. Lalu namespace **std** dipanggil agar saat penulisan fungsi tidak perlu ditambahkan std lagi.
-
+Dalam kode di atas kita akan menggunakan 3 library yaitu **<iostream>** untuk input dan output, **<vector>** untuk membebaskan dalam penggunaan vector dalam pengurutan. Lalu namespace **std** dipanggil agar saat penulisan fungsi tidak perlu ditambahkan std lagi.
 
 #### Bagian 2
 
 ```C++
-void insertionSort(vector<char> &arr) {
-    int n = arr.size();
-    for (int i = 1; i < n; ++i) {
-        char key = arr[i];
-        int j = i - 1;
-        while (j >= 0 && arr[j] > key) {
-            arr[j + 1] = arr[j];
-            j = j - 1;
+int countOccurrences(const vector<int>& data, int target) {
+    int count = 0;
+
+    for (int num : data) {
+        if (num == target) {
+            count++;
         }
-        arr[j + 1] = key;
     }
+
+    return count;
 }
 ```
 
-Pada kode di atas kita membuat fungsi **insertionSort** yang akan berisikan vektor **arr** sebagai parameter serta mengurutkan elemen di dalamnya menggunakan algoritma insertion sort. Disini kita menggunakan perulangan for dan while yang menggunakan perulangan **(i)** yang dapat berpindah-pindah sesuai dengan posisi yang benar dari value elemennya.
+Pada kode di atas akan menerima dua argumen yaitu data yang berupa vektor yang berisi data integer. Lalu terdapat target yang merupakan angka yang akan dicari dalam data. Pada fungsi ini program menggunakan algoritma Sequential Search untuk mencari angka di dalam vektor data yang sesuai dengan angka pada target. Jika ada angka yang cocok, maka akan dimasukkan ke variabel count yang akan mengembalikan jumlah angka yang muncul ke vektor data.
 
 #### Bagian 3
 
-##### Fungsi Main part 1
 ```C++
 int main() {
-    int n;
-    cout << "Masukkan panjang baris: ";
-    cin >> n;
+    vector<int> data = {9, 4, 1, 4, 7, 10, 5, 4, 12, 4};
+    int target = 4;
 
-    vector<char> characters(n);
+    int numOccurrences = countOccurrences(data, target);
 
-    // Meminta pengguna untuk memasukkan n karakter
-    for (int i = 0; i < n; ++i) {
-        cout << "Masukkan karakter atau angka ke-" << i + 1 << ": ";
-        cin >> characters[i];
-    } 
-```
-
-Pada fungsi main di atas merupakan fungsi yang akan di eksekusi pertama, kita akan membedahnya menjadi 3 bagian fungsi main agar mudah dalam penjelasan. Jadi pada fungsi di atas pengguna akan diminta untuk memasukkan panjang vektor atau banyaknya elemen ayang akan ada pada array. Kemudian **characters** akan menyimpan karakter yang diinputkan sesuai dengan panjang vektornya. Tentunya dalam kode di atas menggunakan perulangan yaitu for.
-
-#### Bagian 4
-
-##### Fungsi Main part 2
-
-```C++
-    // Menampilkan isi baris sebelum pengurutan
-    cout << "\nIsi baris sebelum diurutkan: ";
-    for (char c : characters) {
-        cout << c << " ";
-    }
-    cout << endl;
-
-    // Mengurutkan karakter menggunakan Insertion Sort secara ascending (kecil ke besar)
-    insertionSort(characters);
-
-    // Menampilkan hasil pengurutan secara ascending (kecil ke besar)
-    cout << "\nHasil pengurutan secara ascending (kecil ke besar): ";
-    for (char c : characters) {
-        cout << c << " ";
-    }
-
-```
-
-Pada bagian fungsi main ini, komputer diminta untuk memunculkan isi dari vektor sebelum di urutkan. Untuk memunculkan isi vektor, kita menggunakan for yang memanggil characters = c. Setelah itu, karakter akan diurutkan menggunakan insertionSort dan menampilkan kembali karakter setelah diurutkan.
-
-#### Bagian 5
-
-```C++
-    // Mengurutkan karakter menggunakan Insertion Sort secara descending (besar ke kecil)
-    insertionSort(characters);
-    reverse(characters.begin(), characters.end());
-
-    // Menampilkan hasil pengurutan secara descending (besar ke kecil)
-    cout << "\nHasil pengurutan secara descending (besar ke kecil): ";
-    for (char c : characters) {
-        cout << c << " ";
-    }
-
-    cout << endl;
+    cout << "The number of occurrences of " << target << " in the data is: " << numOccurrences << endl;
 
     return 0;
 }
 ```
 
-Pada bagian fungsi main di atas, vektor akan di reverse atau di balikkan agar mendapatkan hasil pengurutan secara descending. Lalu pesan pengurutan secara descending akan muncul dan outputnya muncul di terminal.
+Pada fungsi main di atas merupakan fungsi yang akan di eksekusi pertama, dimana terdapat vektor data yang akan diinisiasi dengan data yang telah dimasukkan. Berikutnya fungsi cout0ccourrences, data, dan target dipanggil ke dalam kode. Lalu hasil yang telah diperoleh dari pemanggilan fungsi ini akan dimunculkan sebagai output dengan cout.
 
 **Output:**
 
 ```C++
-Masukkan panjang baris: 6
-Masukkan karakter atau angka ke-1: s
-Masukkan karakter atau angka ke-2: a
-Masukkan karakter atau angka ke-3: y 
-Masukkan karakter atau angka ke-4: a
-Masukkan karakter atau angka ke-5: n
-Masukkan karakter atau angka ke-6: g
-
-Isi baris sebelum diurutkan: s a y a n g
-
-Hasil pengurutan secara ascending (kecil ke besar): a a g n s y
-Hasil pengurutan secara descending (besar ke kecil): y s n g a a
+The number of occurrences of 4 in the data is: 4
 ```
 
 #### Penjelasan
 
-Pada output di atas, pertama pengguna akan diminta untuk memasukkan panjang dari barisnya. Setelah memasukkan panjang barisnya, maka pengguna dapat memasukkan satu persatu karakter yang diinginkan dengan enter sebagai penjedanya. Setelah itu hasil pengurutan ascending dan descending akan muncul. Hasil output ini di atur pada fungsi main sebelumnya.
+Pada output di atas karena kita mencari angka 4 pada data yang diberikan, maka program akan mencari banyaknya angka 4. Pada data yang diberikan terdapat 4 angka 4 maka outputnya adalah The number of occurrences of 4 in the data is: 4.
 
 #### Full code Screenshot:
 
 <p align="center">
-  <img src="https://github.com/rizaledc/Praktikum-Struktur-Data-Assigment-Modul-3/blob/main/Modul%203/Screenshot%20Kode%20dan%20Output/Unguided3.png" alt="Alt Text">
+  <img src="https://github.com/rizaledc/Praktikum-Struktur-Data-Assigment-Modul-4/blob/main/Modul%204/Screenshot/Unguided3.png" alt="Alt Text">
 </p>
 
 #### Screenshot Output
 
 <p align="center">
-  <img src="https://github.com/rizaledc/Praktikum-Struktur-Data-Assigment-Modul-3/blob/main/Modul%203/Screenshot%20Kode%20dan%20Output/OutUn3.png" alt="Alt Text">
+  <img src="https://github.com/rizaledc/Praktikum-Struktur-Data-Assigment-Modul-4/blob/main/Modul%204/Screenshot/OutUnGuid3.png" alt="Alt Text">
 </p>
 
 ## Kesimpulan
 
-Dalam dunia pemrograman tidak dapat lepas dari data, sehingga data-data ini perlu di olah. Dalam pengolahan data ini diperlukan algoritma yang tepat dan efisien sehingga memudahkan dalam akses dan manipulasi data yang ada. Dalam algoritma sorting, algoritma ini memainkan peran yang krusial dalam mengakses data secara mudah dan efisien. ALgoritma Bubble Sort, Selection Sort, dan Insertion Sort merupakan algoritma yang sangat sering ditemui dan digunakan dalam kehidupan sehari-hari sama seperti halnya dalam dunia pengkodingan.
+Algoritma searching merupakan salah satu algoritma yang sering digunakan dalam pemrograman. Karena, dengan menggunakan algoritma searching ini seorang programer dapat dengan mudah membuat program yang efisien untuk mencari dan menemukan nilai dalam kumpulan data. Dalam algoritma searching, terdapat dua algoritma yaitu Sequentual Search dan Binary Search. Dimana sequential searching adalah pencarian data semantik menggunakan teknologi array satu dimensi untuk melakukan proses pencarian tanpa  melalui semua elemen array secara berurutan, sehingga tidak perlu dilakukan pengurutan data terlebih dahulu. 
+
+Berikutnya, binary search yang merupakan algoritma yang cara kerjanya adalah membagi array menjadi dua bagian dengan mencari nilai tengahnya, lalu membandingkan nilai tengahnya dengan nilai yang dicari. Jika nilai yang dicari sesuai dengan nilai tengah maka program akan selesai. Jika nilai dicari tidak sama dengan nilai tengah, maka algoritma akan melihat apakah nilai yang dicari lebih kecil dari nilai tengah atau lebih besar. Jika lebih kecil dari nilai tengah, maka bagian kanan data akan dihirauhkan dan mengecek hanya bagian kirinya, begitu pula dengan sebaliknya. Hal ini akan dilakukan hingga nilai ditemukan atau array telah habis dicek.
 
 ## Referensi
 
