@@ -12,70 +12,53 @@ a. Sequential Search
 
 Algortima sequential searching adalah pencarian data semantik menggunakan teknologi array satu dimensi untuk melakukan proses pencarian tanpa  melalui semua elemen array secara berurutan, sehingga tidak perlu dilakukan pengurutan data terlebih dahulu (Wafiqah Setyawati Wahyuni). Searching ini juga dapat diartikan dengan proses pencarian suatu data dalam sebuah array tanpa mengecek satu persatu pada setiap index baris. 
 
+Contoh Sequential Search:
+
+<p align="center">
+  <img src="https://github.com/rizaledc/Praktikum-Struktur-Data-Assigment-Modul-4/blob/main/Modul%204/Screenshot/Sequential.png" alt="Alt Text">
+</p>
+
 b. Binary Search
 Algoritma pencarian biner adalah algoritma untuk mencari sebuah nilai pada tabel teurut dengan cara menghilangkan setengah data pada setiap langkah (Lovinta Happy Atrinawati). Dalam penerapan algoritma ini sering digabungkan dengan algoritma sorting agar data dapat diurutkan terlebih dahulu. 
 
+Contoh Binary Search:
 
+<p align="center">
+  <img src="https://github.com/rizaledc/Praktikum-Struktur-Data-Assigment-Modul-4/blob/main/Modul%204/Screenshot/Binary.png" alt="Alt Text">
+</p>
 
 ## Guided 
 
 ### 1. Guided 1
 
-#### Mengurutkan secara ascending untuk data numerik dengan tipe double/float menggunakan algoritma bubble sort.
+#### Buatlah sebuah project dengan menggunakan sequential search sederhana untuk melakukan pencarian data. .
 
 ```C++
 #include <iostream> 
-// MEMBUAT PENGURUTAN ASCENDING
-using namespace std; 
+using namespace std;
 
-// Fungsi untuk mengurutkan baris menggunakan algoritma bubble sort
-void bubble_sort(double arr[], int length){ 
-    bool not_sorted = true;  // Variabel boolean untuk menandai apakah baris belum diurutkan
-    int j=0;  // Variabel untuk menghitung iterasi
-    double tmp;  // Variabel sementara untuk pertukaran nilai
-
-    // Melakukan pengulangan sampai baris diurutkan
-    while (not_sorted){ 
-        not_sorted = false;  // Dianggap baris sudah terurut kecuali ada pertukaran yang terjadi
-        j++;  // Menambah iterasi
-
-        // Melakukan pengulangan untuk satu iterasi
-        for (int i = 0; i < length - j; i++){ 
-            // Jika elemen saat ini lebih besar dari elemen berikutnya, lakukan pertukaran
-            if (arr[i] > arr[i + 1]) { 
-                tmp = arr[i]; 
-                arr[i] = arr[i + 1]; 
-                arr[i + 1] = tmp; 
-                not_sorted = true;  // Tandai bahwa pertukaran telah terjadi, sehingga iterasi berikutnya diperlukan
-            }//end if 
-        }//end for loop 
-    }//end while loop 
-}//end bubble_sort 
-
-// Fungsi untuk mencetak isi baris
-void print_array(double a[], int length) { 
-    for(int i=0; i<length; i++) { 
-        cout << a[i] << "\t"; 
+int main(){ 
+    int n = 10; 
+    int data[n] = {9, 4, 1, 7, 5, 12, 4, 13, 4, 10}; 
+    int cari = 10; 
+    bool ketemu = false; 
+    int i; 
+    // algoritma Sequential Search 
+    for (i = 0; i < n; i++){ 
+        if(data[i] == cari){ 
+            ketemu = true; 
+            break; 
+        } 
     } 
-    cout << endl; 
-} 
-
-// Fungsi utama program
-int main() { 
-    int length = 5;  // Panjang baris
-    double a[] = {18.1, 15.3, 5.2, 36.21, 101.5};  // Inisialisasi baris bilangan double
-
-    // Mencetak isi baris sebelum pengurutan
-    cout << "Urutan bilangan sebelum sorting: " << endl; 
-    print_array(a, length); 
-
-    // Memanggil fungsi bubble_sort untuk mengurutkan baris
-    bubble_sort(a, length); 
-
-    // Mencetak isi baris setelah pengurutan
-    cout << "\nUrutan bilangan setelah sorting: " << endl; 
-    print_array(a, length); 
-} 
+        cout << "\t Program Sequential Search Sederhana\n" << endl ;
+        cout << " data: {9, 4, 1, 7, 5, 12, 4, 13, 4, 10}"<< endl; 
+    if (ketemu){ 
+        cout << "\n angka "<< cari << " ditemukan pada indeks ke-" << i << endl ;
+    } else { 
+        cout << cari << " tidak dapat ditemukan pada data." << endl ; 
+    } 
+    return 0;
+}
 ```
 
 **Penjelasan:**
@@ -92,72 +75,65 @@ Library iostream digunakan untuk menjalankan operasi input dan output pada progr
 #### Bagian 2
 
 ```C++
-void bubble_sort(double arr[], int length){
-    bool not_sorted = true;
-    int j=0;
-    double tmp;
-    while (not_sorted){
-        not_sorted = false;
-        j++;
-        for (int i = 0; i < length - j; i++){
-            if (arr[i] > arr[i + 1]) { 
-                tmp = arr[i]; 
-                arr[i] = arr[i + 1]; 
-                arr[i + 1] = tmp; 
-                not_sorted = true;
-            }
-        }
-    }
-}
+int main(){ 
+    int n = 10; 
+    int data[n] = {9, 4, 1, 7, 5, 12, 4, 13, 4, 10}; 
+    int cari = 10; 
+    bool ketemu = false; 
+    int i; 
 ```
 
-Pada kode di atas menjelaskan bahwa jalan kode akan menggunakan algoritma Bubble sort dengan mengurutkan data dari kecil ke besar(ascending). Dimana variabel **not_sorted** digunakan untuk memberitahu array yang ada apakah sudah terurut atau belum. Ketika semua elemen pada **not_sorted** sudah terurut maka akan bernilai true sehingga perulangan **j** bernilai 0 atau stop, ketika masih bernilai false atau belum terurut maka j akan terus menginterasi hingga bernilai benar.
+Fungsi main() ini merupakan fungsi utama dan pertama di eksekusi dalam program. Pada kode ini terdapat variabel 'n' yang dapat menyimpan jumlah elemen dalam array 'data'. Variabel 'cari' akan menyimpan angka yang akan dicari dalam array. Berikutnya untuk variabel 'ketemu' akan bertipe boolean yang digunakan untuk menandai apakah angka yang dicari ditemukan atau tidak.
 
 #### Bagian 3
 
 ```C++
-void print_array(double a[], int length) { 
-    for(int i=0; i<length; i++) { 
-        cout << a[i] << "\t"; 
+// algoritma Sequential Search 
+    for (i = 0; i < n; i++){ 
+        if(data[i] == cari){ 
+            ketemu = true; 
+            break; 
+        } 
     } 
-    cout << endl; 
-}
 ```
 
-Pada kode ini, kode akan mencetak isi dari arry ke dalam terminal. Pada kode di atas menggunakan for sebagai looping hingga semua elemen tercetak pada terminal.
+Pada kode di atas kita menggunakan loop for untuk melakukan pencarian sekuensial.
 
 #### Bagian 4
 
 ```C++
-int main() { 
-    int length = 5; 
-    double a[] = {18.1, 15.3, 5.2, 36.21, 101.5}; 
-
-    cout << "Urutan bilangan sebelum sorting: " << endl; 
-    print_array(a, length); 
-
-    bubble_sort(a, length); 
-
-    cout << "\nUrutan bilangan setelah sorting: " << endl; 
-    print_array(a, length); 
-}
+        cout << "\t Program Sequential Search Sederhana\n" << endl ;
+        cout << " data: {9, 4, 1, 7, 5, 12, 4, 13, 4, 10}"<< endl; 
 ```
 
-Pada kode ini kita mengetahui bahwa ini merupakan fungsi inti atau fungsi main yang merupakan fungsi pertama kali yang akan dieksekusi. Pada cout pertama akan mencetak array yang belum di sorting, lalu pada cout berikutnya akan mencetak array yang telah disorting karena sebelumnya telah memanggil **bubble_sort(a, length)**.
+Kode di atas merupakan bagian output yang memberikan luaran dari kode yang telah dituliskan.
+
+#### Bagian 5
+
+```C++
+    if (ketemu){ 
+        cout << "\n angka "<< cari << " ditemukan pada indeks ke-" << i << endl ;
+    } else { 
+        cout << cari << " tidak dapat ditemukan pada data." << endl ; 
+    } 
+    return 0;
+```
+
+Kode di atas menggunakan if dan else untuk mengecek nilai dari variabel 'ketemu'. Jika 'ketemu' bernilai True maka angka ditemukan dalam array. Namun, jika 'ketemu' bernilai False maka angka tidak ditemukan dalam array.
 
 #### Output :
 
 ```C++
-Urutan bilangan sebelum sorting: 
-18.1    15.3    5.2     36.21   101.5
+Program Sequential Search Sederhana
 
-Urutan bilangan setelah sorting:
-5.2     15.3    18.1    36.21   101.5
+ data: {9, 4, 1, 7, 5, 12, 4, 13, 4, 10}
+
+ angka 10 ditemukan pada indeks ke-9
 ```
 
 **Penjelasan:**
 
-Dengan hasil output kodingan di atas, kita mengetahui bahwa hasil dari cout pertama merupakan urutan bilangan sebelum di sorting lalu pada cout kedua merupakan urutan bilangan setelah disorting. Pada output kodingan ini bernilai benar karena urutan sudah secara ascending.
+Program di atas akan mengeluarkan output pesan singkat di awal program, lalu akan memunculkan data yang ada dan memberitahu angka yang ditemukan berada pada indeks ke berapa.
 
 #### Full Code Screenshot
 
@@ -291,11 +267,13 @@ Pada kode ini kita mengetahui bahwa ini merupakan fungsi inti atau fungsi main y
 #### Output:
 
 ```C++
-Urutan karakter sebelum sorting: 
-s       a       y       a       n       g
+BINARY SEARCH
 
-Urutan karakter setelah sorting:
-y       s       n       g       a       a
+ Data :   1  8  2  5  4  9  7
+
+ Masukkan data yang ingin Anda cari : 8
+
+ Data diurutkan :   1  2  4  5  7  8  9
 ```
 
 **Penjelasan:**
