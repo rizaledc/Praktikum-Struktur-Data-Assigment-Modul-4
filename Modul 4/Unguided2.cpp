@@ -26,7 +26,6 @@ int main() {
     string sentence;
     cout << "Enter a sentence: ";
     getline(cin, sentence);
-
     int numVowels = countVowels(sentence);
 
     cout << "The number of vowels in the sentence is: " << numVowels << endl;

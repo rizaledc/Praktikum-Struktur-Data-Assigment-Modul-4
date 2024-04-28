@@ -1,49 +1,47 @@
 #include <iostream>
 #include <algorithm>
-#include <vector>
+#include <string>
 
 using namespace std;
 
-// Function to find a number in an array using Binary Search
-bool binarySearch(const vector<int>& arr, int target) {
+// Fungsi untuk mencari sebuah huruf pada sebuah kalimat menggunakan Binary Search
+bool binarySearch(const string& sentence, char target) {
     int left = 0;
-    int right = arr.size() - 1;
+    int right = sentence.length() - 1;
     
     while (left <= right) {
         int mid = left + (right - left) / 2;
 
-        if (arr[mid] == target) {
-            return true; // Number found
-        } else if (arr[mid] < target) {
-            left = mid + 1; // Search on the right side
+        if (sentence[mid] == target) {
+            return true; // Huruf ditemukan
+        } else if (sentence[mid] < target) {
+            left = mid + 1; // Cari di sebelah kanan
         } else {
-            right = mid - 1; // Search on the left side
+            right = mid - 1; // Cari di sebelah kiri
         }
     }
 
-    return false; // Number not found
+    return false; // Huruf tidak ditemukan
 }
 
 int main() {
-    int n;
-    cout << "Enter the number of elements in the array: ";
-    cin >> n;
+    string sentence;
+    char target;
 
-    vector<int> arr(n);
-    cout << "Enter the elements of the array in sorted order: ";
-    for (int i = 0; i < n; ++i) {
-        cin >> arr[i];
-    }
+    cout << "Masukkan kalimat: ";
+    getline(cin, sentence);
 
-    int target;
-    cout << "Enter the number to search for: ";
+    // Melakukan sorting pada kalimat untuk memastikan binary search dapat berfungsi
+    sort(sentence.begin(), sentence.end());
+
+    cout << "Masukkan huruf yang ingin dicari: ";
     cin >> target;
 
-    // Using binary search to find the number
-    if (binarySearch(arr, target)) {
-        cout << "The number " << target << " is found in the array." << endl;
+    // Menggunakan binary search untuk mencari huruf
+    if (binarySearch(sentence, target)) {
+        cout << "Huruf '" << target << "' ditemukan dalam kalimat." << endl;
     } else {
-        cout << "The number " << target << " is not found in the array." << endl;
+        cout << "Huruf '" << target << "' tidak ditemukan dalam kalimat." << endl;
     }
 
     return 0;
